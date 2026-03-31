@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  plastic-store-app:
+    container_name: plastic_store_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - plastic_store_network
+
+networks:
+  plastic_store_network:
+    driver: bridge
