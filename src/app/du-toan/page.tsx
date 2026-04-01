@@ -3,6 +3,9 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import FloorPlan2D from "@/components/FloorPlan2D";
+import dynamic from "next/dynamic";
+
+const Room3DViewer = dynamic(() => import("@/components/Room3DViewer"), { ssr: false });
 import {
     ChevronRight, Calculator, Home, Bed, CookingPot, BookOpen,
     Tv, Plus, Minus, Trash2, Phone, MessageCircle, Sparkles,
@@ -140,6 +143,7 @@ export default function EstimationToolPage() {
     const [selectedRoom, setSelectedRoom] = useState<string | null>(null);
     const [roomLength, setRoomLength] = useState(4.5);
     const [roomWidth, setRoomWidth] = useState(3.5);
+    const [view3D, setView3D] = useState(false);
 
     // Computed total
     const total = cart.reduce((sum, item) => {
@@ -389,13 +393,49 @@ export default function EstimationToolPage() {
                                     ))}
                                 </div>
 
-                                {/* Floor Plan Preview */}
+                                {/* Floor Plan / 3D Preview */}
                                 {selectedRoom && (
-                                    <FloorPlan2D
-                                        roomWidth={roomLength}
-                                        roomHeight={roomWidth}
-                                        roomType={selectedRoom}
-                                    />
+                                    <div>
+                                        {/* 2D / 3D Toggle */}
+                                        <div className="flex items-center gap-2 mb-3">
+                                            <button
+                                                onClick={() => setView3D(false)}
+                                                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold transition-all ${
+                                                    !view3D
+                                                        ? "bg-orange-500 text-white shadow-md"
+                                                        : "bg-white border border-slate-200 text-slate-600 hover:border-orange-300"
+                                                }`}
+                                            >
+                                                📐 Sơ Đồ 2D
+                                            </button>
+                                            <button
+                                                onClick={() => setView3D(true)}
+                                                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold transition-all ${
+                                                    view3D
+                                                        ? "bg-slate-800 text-orange-400 shadow-md"
+                                                        : "bg-white border border-slate-200 text-slate-600 hover:border-slate-400"
+                                                }`}
+                                            >
+                                                🧊 Mô Hình 3D
+                                                <span className="ml-1 text-[10px] bg-orange-500 text-white px-1.5 py-0.5 rounded-full">MỚI</span>
+                                            </button>
+                                        </div>
+
+                                        {/* View */}
+                                        {view3D ? (
+                                            <Room3DViewer
+                                                roomWidth={roomLength}
+                                                roomDepth={roomWidth}
+                                                roomType={selectedRoom}
+                                            />
+                                        ) : (
+                                            <FloorPlan2D
+                                                roomWidth={roomLength}
+                                                roomHeight={roomWidth}
+                                                roomType={selectedRoom}
+                                            />
+                                        )}
+                                    </div>
                                 )}
                             </div>
                         )}
