@@ -58,12 +58,16 @@ function hexToRgb(hex: string) {
 }
 
 /* ─── Room Shell with Architectural Details ─── */
-function RoomShell({ width, depth, wallHeight = 2.6 }: { width: number; depth: number; wallHeight?: number }) {
+function RoomShell({ width, depth, wallHeight = 2.6, hasDoor = true, hasWindow = false }: { width: number; depth: number; wallHeight?: number; hasDoor?: boolean; hasWindow?: boolean }) {
   const floorColor = new THREE.Color("#d1bfae"); 
   const wallColor = new THREE.Color("#f8fafc"); 
   const doorW = 0.9;
   const doorH = 2.2;
   const doorZPos = depth * 0.7; 
+
+  const windowW = 1.2;
+  const windowH = 1.2;
+  const windowY = 0.9; // Sill height
 
   return (
     <group>
@@ -73,54 +77,104 @@ function RoomShell({ width, depth, wallHeight = 2.6 }: { width: number; depth: n
       </mesh>
       <gridHelper args={[Math.max(width, depth) * 2, Math.max(width, depth) * 10, 0x000000, 0x000000]} position={[width/2, 0.001, depth/2]} material-opacity={0.06} material-transparent />
 
-      <mesh receiveShadow position={[width / 2, wallHeight / 2, 0]}>
-        <boxGeometry args={[width, wallHeight, 0.15]} />
-        <meshStandardMaterial color={wallColor} roughness={1} />
-      </mesh>
+      {/* Back Wall (z=0) with optional Window */}
+      {hasWindow ? (
+        <group position={[width / 2, 0, 0]}>
+           {/* Lower wall */}
+           <mesh receiveShadow position={[0, windowY / 2, 0]}>
+             <boxGeometry args={[width, windowY, 0.15]} />
+             <meshStandardMaterial color={wallColor} roughness={1} />
+           </mesh>
+           {/* Upper wall */}
+           <mesh receiveShadow position={[0, windowY + windowH + (wallHeight - windowY - windowH) / 2, 0]}>
+             <boxGeometry args={[width, wallHeight - windowY - windowH, 0.15]} />
+             <meshStandardMaterial color={wallColor} roughness={1} />
+           </mesh>
+           {/* Left side of window */}
+           <mesh receiveShadow position={[-(windowW + (width - windowW)/2)/2, windowY + windowH/2, 0]}>
+             <boxGeometry args={[(width - windowW)/2, windowH, 0.15]} />
+             <meshStandardMaterial color={wallColor} roughness={1} />
+           </mesh>
+           {/* Right side of window */}
+           <mesh receiveShadow position={[(windowW + (width - windowW)/2)/2, windowY + windowH/2, 0]}>
+             <boxGeometry args={[(width - windowW)/2, windowH, 0.15]} />
+             <meshStandardMaterial color={wallColor} roughness={1} />
+           </mesh>
+           {/* Window Frame & Glass */}
+           <group position={[0, windowY + windowH/2, 0]}>
+              <RoundedBox args={[windowW, windowH, 0.16]} radius={0.01} castShadow>
+                 <meshStandardMaterial color="#334155" roughness={0.8} />
+              </RoundedBox>
+              <mesh position={[0, 0, 0.01]}>
+                 <planeGeometry args={[windowW - 0.1, windowH - 0.1]} />
+                 <meshPhysicalMaterial color="#bae6fd" transmission={0.9} opacity={1} transparent roughness={0.1} clearcoat={1.0} />
+              </mesh>
+           </group>
+        </group>
+      ) : (
+        <mesh receiveShadow position={[width / 2, wallHeight / 2, 0]}>
+          <boxGeometry args={[width, wallHeight, 0.15]} />
+          <meshStandardMaterial color={wallColor} roughness={1} />
+        </mesh>
+      )}
+
+      {/* Left Wall (x=0) */}
       <mesh receiveShadow position={[0, wallHeight / 2, depth / 2]}>
         <boxGeometry args={[0.15, wallHeight, depth]} />
         <meshStandardMaterial color={wallColor} roughness={1} />
       </mesh>
 
+      {/* Right Wall (x=width) with optional Door */}
       <group position={[width, 0, 0]}>
-        <mesh receiveShadow position={[0, wallHeight / 2, (doorZPos - doorW/2) / 2]}>
-          <boxGeometry args={[0.15, wallHeight, doorZPos - doorW/2]} />
-          <meshStandardMaterial color={wallColor} roughness={1} />
-        </mesh>
-        
-        <mesh receiveShadow position={[0, doorH + (wallHeight - doorH) / 2, doorZPos]}>
-          <boxGeometry args={[0.15, wallHeight - doorH, doorW]} />
-          <meshStandardMaterial color={wallColor} roughness={1} />
-        </mesh>
+        {hasDoor ? (
+          <>
+            <mesh receiveShadow position={[0, wallHeight / 2, (doorZPos - doorW/2) / 2]}>
+              <boxGeometry args={[0.15, wallHeight, doorZPos - doorW/2]} />
+              <meshStandardMaterial color={wallColor} roughness={1} />
+            </mesh>
+            
+            <mesh receiveShadow position={[0, doorH + (wallHeight - doorH) / 2, doorZPos]}>
+              <boxGeometry args={[0.15, wallHeight - doorH, doorW]} />
+              <meshStandardMaterial color={wallColor} roughness={1} />
+            </mesh>
 
-        <mesh receiveShadow position={[0, wallHeight / 2, doorZPos + doorW/2 + (depth - doorZPos - doorW/2) / 2]}>
-          <boxGeometry args={[0.15, wallHeight, depth - doorZPos - doorW/2]} />
-          <meshStandardMaterial color={wallColor} roughness={1} />
-        </mesh>
+            <mesh receiveShadow position={[0, wallHeight / 2, doorZPos + doorW/2 + (depth - doorZPos - doorW/2) / 2]}>
+              <boxGeometry args={[0.15, wallHeight, depth - doorZPos - doorW/2]} />
+              <meshStandardMaterial color={wallColor} roughness={1} />
+            </mesh>
 
-        <group position={[-0.05, 0, doorZPos - doorW/2]} rotation={[0, -Math.PI / 3, 0]}>
-          <RoundedBox args={[0.04, doorH - 0.02, doorW - 0.02]} radius={0.01} position={[0, doorH/2, doorW/2]} castShadow receiveShadow>
-            <meshStandardMaterial color="#b47d53" roughness={0.5} />
-          </RoundedBox>
-          <Cylinder args={[0.01, 0.01, 0.15]} position={[-0.04, doorH/2, doorW * 0.85]} rotation={[0, 0, Math.PI/2]} castShadow>
-             <meshStandardMaterial color="#94a3b8" metalness={0.9} roughness={0.2} />
-          </Cylinder>
-        </group>
-        
-        <mesh position={[-0.08, doorH/2, doorZPos - doorW/2 - 0.03]} castShadow>
-          <boxGeometry args={[0.04, doorH, 0.05]} />
-          <meshStandardMaterial color="#e2e8f0" />
-        </mesh>
-        <mesh position={[-0.08, doorH/2, doorZPos + doorW/2 + 0.03]} castShadow>
-          <boxGeometry args={[0.04, doorH, 0.05]} />
-          <meshStandardMaterial color="#e2e8f0" />
-        </mesh>
-        <mesh position={[-0.08, doorH + 0.02, doorZPos]} castShadow>
-          <boxGeometry args={[0.04, 0.05, doorW + 0.1]} />
-          <meshStandardMaterial color="#e2e8f0" />
-        </mesh>
+            {/* The Door itself */}
+            <group position={[-0.05, 0, doorZPos - doorW/2]} rotation={[0, -Math.PI / 3, 0]}>
+              <RoundedBox args={[0.04, doorH - 0.02, doorW - 0.02]} radius={0.01} position={[0, doorH/2, doorW/2]} castShadow receiveShadow>
+                <meshStandardMaterial color="#b47d53" roughness={0.5} />
+              </RoundedBox>
+              <Cylinder args={[0.01, 0.01, 0.15]} position={[-0.04, doorH/2, doorW * 0.85]} rotation={[0, 0, Math.PI/2]} castShadow>
+                 <meshStandardMaterial color="#94a3b8" metalness={0.9} roughness={0.2} />
+              </Cylinder>
+            </group>
+            
+            <mesh position={[-0.08, doorH/2, doorZPos - doorW/2 - 0.03]} castShadow>
+              <boxGeometry args={[0.04, doorH, 0.05]} />
+              <meshStandardMaterial color="#e2e8f0" />
+            </mesh>
+            <mesh position={[-0.08, doorH/2, doorZPos + doorW/2 + 0.03]} castShadow>
+              <boxGeometry args={[0.04, doorH, 0.05]} />
+              <meshStandardMaterial color="#e2e8f0" />
+            </mesh>
+            <mesh position={[-0.08, doorH + 0.02, doorZPos]} castShadow>
+              <boxGeometry args={[0.04, 0.05, doorW + 0.1]} />
+              <meshStandardMaterial color="#e2e8f0" />
+            </mesh>
+          </>
+        ) : (
+          <mesh receiveShadow position={[0, wallHeight / 2, depth / 2]}>
+            <boxGeometry args={[0.15, wallHeight, depth]} />
+            <meshStandardMaterial color={wallColor} roughness={1} />
+          </mesh>
+        )}
       </group>
 
+      {/* Skirting Boards */}
       <mesh position={[width / 2, 0.05, 0.08]} castShadow>
         <boxGeometry args={[width - 0.15, 0.1, 0.02]} />
         <meshStandardMaterial color="#94a3b8" roughness={0.8} />
@@ -129,6 +183,12 @@ function RoomShell({ width, depth, wallHeight = 2.6 }: { width: number; depth: n
         <boxGeometry args={[0.02, 0.1, depth - 0.15]} />
         <meshStandardMaterial color="#94a3b8" roughness={0.8} />
       </mesh>
+      {!hasDoor && (
+         <mesh position={[width - 0.08, 0.05, depth / 2]} castShadow>
+           <boxGeometry args={[0.02, 0.1, depth - 0.15]} />
+           <meshStandardMaterial color="#94a3b8" roughness={0.8} />
+         </mesh>
+      )}
     </group>
   );
 }
@@ -891,6 +951,9 @@ function CameraSetup({ roomW, roomD, isDragging }: { roomW: number; roomD: numbe
 export interface Room3DSceneProps {
   roomWidth: number;
   roomDepth: number;
+  roomHeight?: number;
+  hasDoor?: boolean;
+  hasWindow?: boolean;
   roomType: string;
   configs: FurnitureConfigs;
   positions: FurniturePositions;
@@ -902,6 +965,9 @@ export interface Room3DSceneProps {
 export function Room3DScene({
   roomWidth,
   roomDepth,
+  roomHeight = 2.6,
+  hasDoor = true,
+  hasWindow = false,
   roomType,
   configs,
   positions,
@@ -951,7 +1017,7 @@ export function Room3DScene({
         color="#ffffff"
       />
 
-      <RoomShell width={roomWidth} depth={roomDepth} />
+      <RoomShell width={roomWidth} depth={roomDepth} wallHeight={roomHeight} hasDoor={hasDoor} hasWindow={hasWindow} />
       
       {/* Critical for realism: ground shadows */}
       <ContactShadows position={[roomWidth/2, 0.01, roomDepth/2]} opacity={0.5} scale={Math.max(roomWidth, roomDepth) + 5} blur={1.5} far={4} color="#1e293b" />
