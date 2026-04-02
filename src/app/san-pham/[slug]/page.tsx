@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ChevronRight, Settings, Maximize, Palette, ShieldCheck, PenTool, Phone, MessageCircle, Ruler, Star, Droplets, BugOff, Truck } from "lucide-react";
+import ProductGallery from "@/components/ProductGallery";
 
 const productData: Record<string, {
     name: string; category: string; price: string; unit: string;
@@ -213,22 +214,7 @@ export default async function ProductDetailPage(props: { params: Promise<{ slug:
                     <div className="flex flex-col lg:flex-row gap-12">
 
                         {/* Image Gallery */}
-                        <div className="w-full lg:w-1/2">
-                            <div className="aspect-[4/3] rounded-2xl overflow-hidden mb-4 border border-slate-100 bg-slate-50">
-                                <img
-                                    src={product.image}
-                                    alt={`${product.name} - Nội Thất Nhựa Huy Hoàng Đà Nẵng`}
-                                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700 cursor-zoom-in"
-                                />
-                            </div>
-                            <div className="grid grid-cols-4 gap-3">
-                                {product.gallery.map((img, i) => (
-                                    <div key={i} className={`aspect-square rounded-xl overflow-hidden border-2 ${i === 0 ? 'border-orange-500' : 'border-slate-200 opacity-70 hover:opacity-100'} transition-all cursor-pointer`}>
-                                        <img src={img} alt={`${product.name} góc ${i + 1}`} className="w-full h-full object-cover" loading="lazy" />
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                        <ProductGallery images={product.gallery} productName={product.name} />
 
                         {/* Product Info */}
                         <div className="w-full lg:w-1/2 flex flex-col">

@@ -7,62 +7,9 @@ export const metadata: Metadata = {
     description: "Tổng hợp các dự án, công trình thi công tủ bếp nhựa, tủ quần áo, giường ngủ bằng nhựa Ecoplast / Penco / Casawood / Golden Plast do Huy Hoàng thực hiện.",
 };
 
-const projects = [
-    {
-        id: "noi-that-chung-cu-2-phong-ngu",
-        title: "Thi Công Trọn Gói Dự Án Căn Hộ 2 Phòng Ngủ",
-        location: "Sơn Trà, Đà Nẵng",
-        date: "10/2026",
-        category: "Combo Trọn Gói",
-        image: "/images/products/tu-bep-chu-l.png",
-        tags: ["Tủ bếp chữ L", "Tủ quần áo", "Giường ngủ", "Tủ giày"]
-    },
-    {
-        id: "tu-bep-acrylic-biet-thu",
-        title: "Dự Án Tủ Bếp Acrylic Sang Trọng Cho Biệt Thự",
-        location: "Hải Châu, Đà Nẵng",
-        date: "09/2026",
-        category: "Tủ Bếp",
-        image: "/images/products/tu-bep-ban-dao.png",
-        tags: ["Tủ bếp chữ U", "Bàn đảo", "Acrylic"]
-    },
-    {
-        id: "cai-tao-bep-cu",
-        title: "Cải Tạo Bếp Cũ Mối Mọt Thành Bếp Nhựa Hiện Đại",
-        location: "Liên Chiểu, Đà Nẵng",
-        date: "08/2026",
-        category: "Cải Tạo & Sửa Chữa",
-        image: "/images/products/tu-bep-ban-dao.png",
-        tags: ["Tháo dỡ bếp gỗ", "Tủ bếp nhựa chữ I", "Chống mối mọt"]
-    },
-    {
-        id: "noi-that-phong-ngu-tre-em",
-        title: "Phòng Ngủ Tone Trắng Hồng Cho Bé Gái",
-        location: "Cẩm Lệ, Đà Nẵng",
-        date: "07/2026",
-        category: "Phòng Ngủ",
-        image: "/images/products/giuong-nhua-1m8.png",
-        tags: ["Giường tầng", "Tủ áo cửa lùa", "Bàn học góc"]
-    },
-    {
-        id: "thi-cong-nha-pho-3-tang",
-        title: "Hoàn Thiện Nội Thất Nhà Phố 3 Tầng KĐT Hòa Xuân",
-        location: "Hòa Xuân, Cẩm Lệ",
-        date: "06/2026",
-        category: "Combo Trọn Gói",
-        image: "/images/products/tu-bep-chu-i.png",
-        tags: ["Bếp", "3 Phòng Ngủ", "Kệ Tivi", "Tủ cầu thang"]
-    },
-    {
-        id: "tu-ao-khong-gian-mo",
-        title: "Hệ Tủ Quần Áo Kịch Trần Không Gian Mở",
-        location: "Ngũ Hành Sơn, Đà Nẵng",
-        date: "05/2026",
-        category: "Phòng Ngủ",
-        image: "/images/products/tu-quan-ao-2-canh.png",
-        tags: ["Tủ áo kính", "Đèn led", "Gỗ nhựa Ecoplast"]
-    }
-];
+import { PROJECTS_DATA } from "./data";
+
+const projects = Object.values(PROJECTS_DATA);
 
 export default function ProjectsPage() {
     return (
@@ -100,7 +47,7 @@ export default function ProjectsPage() {
                         <Link href={`/cong-trinh/${project.id}`} key={project.id} className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl border border-slate-200 transition-all duration-300 flex flex-col">
                             <div className="relative h-64 overflow-hidden">
                                 <img
-                                    src={project.image}
+                                    src={project.mainImage}
                                     alt={project.title}
                                     className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                                 />
