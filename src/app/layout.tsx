@@ -61,18 +61,6 @@ export default function RootLayout({
         </Script>
         {/* End Google Tag Manager */}
 
-        {/* Google Analytics 4 */}
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-G5TG52W35X" strategy="afterInteractive" />
-        <Script id="google-analytics-4" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-G5TG52W35X');
-          `}
-        </Script>
-        {/* End Google Analytics 4 */}
-
         <Header />
         <main className="flex-1">
           {children}
