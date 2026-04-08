@@ -989,26 +989,19 @@ export function Room3DScene({
     <Canvas
       shadows
       camera={{ position: initCamPos, fov: 40 }} 
-      gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.1 }}
-      style={{ background: "#e2e8f0" }} 
+      gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.25 }}
+      style={{ background: "#f1f5f9" }} 
+      dpr={[1, 1.5]}
       onClick={() => onSelectItem(null)}
     >
-      <SoftShadows size={25} samples={10} focus={0.5} />
-      <ambientLight intensity={0.6} />
-      <hemisphereLight args={["#ffffff", "#cbd5e1", 0.7]} />
+      <ambientLight intensity={0.5} />
       
       <directionalLight
-        position={[roomWidth * 0.5, 12, roomDepth * 0.8]}
-        intensity={1.5}
+        position={[roomWidth * 0.5, 8, roomDepth * 0.8]}
+        intensity={1.2}
         castShadow
-        shadow-mapSize={[4096, 4096]} 
-        shadow-bias={-0.0005}
-        shadow-camera-near={0.1}
-        shadow-camera-far={40}
-        shadow-camera-left={-10}
-        shadow-camera-right={10}
-        shadow-camera-top={10}
-        shadow-camera-bottom={-10}
+        shadow-mapSize={[1024, 1024]} 
+        shadow-bias={-0.001}
       />
 
       <directionalLight

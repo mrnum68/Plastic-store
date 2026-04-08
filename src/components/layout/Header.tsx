@@ -9,6 +9,8 @@ const navLinks = [
   { href: "/#bang-gia", label: "Bảng Giá Xưởng" },
   { href: "/#chat-lieu", label: "Chất Liệu" },
   { href: "/#cong-trinh", label: "Công Trình Thực Tế" },
+  { href: "/thu-vien", label: "Thư Viện" },
+  { href: "/tin-tuc", label: "Tin Tức" },
 ];
 
 export default function Header() {

@@ -51,7 +51,7 @@ export default function ProjectsSlider() {
 
                 <div className="embla" ref={emblaRef}>
                     <div className="embla__container flex">
-                        {projects.map((project) => (
+                        {projects.map((project, index) => (
                             <div key={project.id} className="embla__slide flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_33.33%] min-w-0 pl-6">
                                 <Link href={`/cong-trinh/${project.id}`} className="group rounded-2xl overflow-hidden relative block w-full h-full">
                                     <div className="aspect-[4/5] overflow-hidden relative w-full h-full">
@@ -59,6 +59,8 @@ export default function ProjectsSlider() {
                                             src={project.mainImage}
                                             alt={project.title}
                                             fill
+                                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                            priority={index <= 2}
                                             className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                                         />
                                     </div>

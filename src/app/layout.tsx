@@ -10,13 +10,13 @@ import Script from "next/script";
 const inter = Inter({ subsets: ["latin", "vietnamese"] });
 
 export const metadata: Metadata = {
-  title: "Xưởng Nội Thất Nhựa Huy Hoàng Đà Nẵng - Giá Gốc Tại Xưởng - Bảo Hành 10 Năm",
-  description: "Xưởng thi công nội thất nhựa cao cấp Ecoplast / Penco / Casawood / Golden Plast tại Đà Nẵng. Tủ bếp nhựa, tủ quần áo, giường nhựa chống nước, chống mối mọt 100%. Nhận làm theo yêu cầu với giá gốc.",
-  keywords: "tủ bếp nhựa đà nẵng, nội thất nhựa huy hoàng, tủ quần áo nhựa đà nẵng, thi công nội thất nhựa, xưởng nội thất nhựa, nhựa vincoplast đà nẵng, nhựa ecoplast đà nẵng",
+  title: "Xưởng Nội Thất Nhựa Huy Hoàng Đà Nẵng | Tủ Bếp Ecoplast, Tủ Quần Áo Cao Cấp",
+  description: "Xưởng nội thất nhựa Huy Hoàng Đà Nẵng chuyên thi công tủ bếp nhựa Ecoplast, tủ quần áo, giường nhựa chống nước, chống mối mọt. Dự toán giá 3D realtime, bảo hành 10 năm.",
+  keywords: "nội thất nhựa Đà Nẵng, tủ bếp nhựa Đà Nẵng, tủ quần áo nhựa Đà Nẵng, nội thất nhựa huy hoàng, tủ nhựa cao cấp Đà Nẵng, tủ bếp nhựa Ecoplast Đà Nẵng, thiết kế nội thất nhựa 3D",
   openGraph: {
-    title: "Xưởng Nội Thất Nhựa Huy Hoàng Đà Nẵng - Giá Gốc Tại Xưởng",
-    description: "Xưởng thi công nội thất nhựa cao cấp Ecoplast / Penco / Casawood / Golden Plast tại Đà Nẵng. Chống nước, chống mối mọt 100%.",
-    url: "https://noithatnhuatst.com",
+    title: "Nội Thất Nhựa Huy Hoàng Đà Nẵng - Thiết Kế 3D & Dự Toán Realtime",
+    description: "Xưởng trực tiếp thi công nội thất nhựa cao cấp Ecoplast tại Đà Nẵng. Chống nước, chống mối mọt 100%, thiết kế 3D miễn phí.",
+    url: "https://huyhoanginterior.com",
     siteName: "Nội Thất Nhựa Huy Hoàng",
     locale: "vi_VN",
     type: "website",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: "https://noithatnhuatst.com",
+    canonical: "https://huyhoanginterior.com",
   }
 };
 
@@ -36,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi" className="scroll-smooth">
+    <html lang="vi" className="scroll-smooth" data-scroll-behavior="smooth">
       <body className={`${inter.className} min-h-screen flex flex-col pt-16`}>
         {/* Google Tag Manager (noscript) */}
         <noscript>

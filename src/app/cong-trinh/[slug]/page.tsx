@@ -130,10 +130,10 @@ export default async function ProjectDetailPage(props: { params: Promise<{ slug:
 
                             <div className="bg-orange-500 rounded-3xl p-6 md:p-8 text-white shadow-xl shadow-orange-500/20">
                                 <h3 className="font-bold text-2xl mb-4">Bạn thích mẫu thiết kế này?</h3>
-                                <p className="text-orange-100 mb-6">Chúng tôi có thể điều chỉnh toàn bộ kích thước, layout và màu sắc để phù hợp với riêng bản vẽ nhà bạn.</p>
+                                <p className="text-orange-100 mb-6">Chúng tôi có thể điều chỉnh toàn bộ kích thước, layout và màu sắc để phù hợp với riêng không gian nhà bạn.</p>
                                 <div className="space-y-4">
                                     <a href="https://zalo.me/0865182562" target="_blank" className="block w-full text-center bg-white text-orange-600 hover:bg-slate-50 font-bold py-3.5 rounded-xl transition-colors">
-                                        Nhận Bản Vẽ Miễn Phí
+                                        Nhận Báo Giá Mẫu Này
                                     </a>
                                     <a href="tel:0865182562" className="w-full flex items-center justify-center gap-2 border-2 border-white/40 hover:bg-white/10 font-bold py-3.5 rounded-xl transition-colors">
                                         <Phone size={18} /> Hotline: 086.518.2562
