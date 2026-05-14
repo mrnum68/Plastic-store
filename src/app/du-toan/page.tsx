@@ -6,6 +6,16 @@ import FloorPlan2D from "@/components/FloorPlan2D";
 import dynamic from "next/dynamic";
 
 const Room3DViewer = dynamic(() => import("@/components/Room3DViewer"), { ssr: false });
+const KitchenConfigurator3D = dynamic(() => import("@/components/KitchenConfigurator3D"), {
+    ssr: false, loading: () => (
+        <div className="w-full h-[600px] flex items-center justify-center bg-slate-900 rounded-2xl">
+            <div className="text-center">
+                <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                <p className="text-slate-300 text-sm">Đang tải Configurator Bếp 3D...</p>
+            </div>
+        </div>
+    )
+});
 import {
     ChevronRight, Calculator, Home, Bed, CookingPot, BookOpen,
     Tv, Plus, Minus, Trash2, Phone, MessageCircle, Sparkles,
@@ -25,78 +35,78 @@ const PRODUCTS: {
     prices: Record<MaterialId, number>; minSize: number; maxSize: number; step: number; defaultSize: number;
     description: string;
 }[] = [
-    {
-        id: "tu-bep-tren", name: "Tủ Bếp Trên", icon: <CookingPot size={24} />, unit: "md", unitLabel: "mét dài",
-        prices: { thuong: 1_200_000, caocap: 1_600_000 },
-        minSize: 1, maxSize: 6, step: 0.5, defaultSize: 2.5, description: "Tủ treo tường phía trên bếp",
-    },
-    {
-        id: "tu-bep-duoi", name: "Tủ Bếp Dưới", icon: <CookingPot size={24} />, unit: "md", unitLabel: "mét dài",
-        prices: { thuong: 1_800_000, caocap: 2_500_000 },
-        minSize: 1, maxSize: 6, step: 0.5, defaultSize: 2.5, description: "Tủ kệ phía dưới mặt bếp",
-    },
-    {
-        id: "tu-quan-ao", name: "Tủ Quần Áo", icon: <Home size={24} />, unit: "md", unitLabel: "mét dài (cao 200cm, sâu 50cm)",
-        prices: { thuong: 2_800_000, caocap: 3_200_000 },
-        minSize: 0.8, maxSize: 4, step: 0.1, defaultSize: 1.0, description: "Tính theo chiều ngang tủ, cao 200cm",
-    },
-    {
-        id: "giuong", name: "Giường Ngủ", icon: <Bed size={24} />, unit: "md", unitLabel: "mét dài (chiều ngang giường)",
-        prices: { thuong: 2_600_000, caocap: 3_100_000 },
-        minSize: 1.2, maxSize: 2.2, step: 0.1, defaultSize: 1.8, description: "Tính theo chiều ngang, dài cố định 2m",
-    },
-    {
-        id: "ban-hoc", name: "Bàn Học Sinh", icon: <BookOpen size={24} />, unit: "bộ", unitLabel: "bộ kèm giá sách",
-        prices: { thuong: 1_200_000, caocap: 1_600_000 },
-        minSize: 1, maxSize: 5, step: 1, defaultSize: 1, description: "An toàn cho trẻ 6-15 tuổi",
-    },
-    {
-        id: "ke-tivi", name: "Kệ Tivi", icon: <Tv size={24} />, unit: "md", unitLabel: "mét dài",
-        prices: { thuong: 1_500_000, caocap: 2_200_000 },
-        minSize: 1, maxSize: 4, step: 0.5, defaultSize: 1.8, description: "Kệ treo hoặc đặt sàn",
-    },
-];
+        {
+            id: "tu-bep-tren", name: "Tủ Bếp Trên", icon: <CookingPot size={24} />, unit: "md", unitLabel: "mét dài",
+            prices: { thuong: 1_200_000, caocap: 1_600_000 },
+            minSize: 1, maxSize: 6, step: 0.5, defaultSize: 2.5, description: "Tủ treo tường phía trên bếp",
+        },
+        {
+            id: "tu-bep-duoi", name: "Tủ Bếp Dưới", icon: <CookingPot size={24} />, unit: "md", unitLabel: "mét dài",
+            prices: { thuong: 1_800_000, caocap: 2_500_000 },
+            minSize: 1, maxSize: 6, step: 0.5, defaultSize: 2.5, description: "Tủ kệ phía dưới mặt bếp",
+        },
+        {
+            id: "tu-quan-ao", name: "Tủ Quần Áo", icon: <Home size={24} />, unit: "md", unitLabel: "mét dài (cao 200cm, sâu 50cm)",
+            prices: { thuong: 2_800_000, caocap: 3_200_000 },
+            minSize: 0.8, maxSize: 4, step: 0.1, defaultSize: 1.0, description: "Tính theo chiều ngang tủ, cao 200cm",
+        },
+        {
+            id: "giuong", name: "Giường Ngủ", icon: <Bed size={24} />, unit: "md", unitLabel: "mét dài (chiều ngang giường)",
+            prices: { thuong: 2_600_000, caocap: 3_100_000 },
+            minSize: 1.2, maxSize: 2.2, step: 0.1, defaultSize: 1.8, description: "Tính theo chiều ngang, dài cố định 2m",
+        },
+        {
+            id: "ban-hoc", name: "Bàn Học Sinh", icon: <BookOpen size={24} />, unit: "bộ", unitLabel: "bộ kèm giá sách",
+            prices: { thuong: 1_200_000, caocap: 1_600_000 },
+            minSize: 1, maxSize: 5, step: 1, defaultSize: 1, description: "An toàn cho trẻ 6-15 tuổi",
+        },
+        {
+            id: "ke-tivi", name: "Kệ Tivi", icon: <Tv size={24} />, unit: "md", unitLabel: "mét dài",
+            prices: { thuong: 1_500_000, caocap: 2_200_000 },
+            minSize: 1, maxSize: 4, step: 0.5, defaultSize: 1.8, description: "Kệ treo hoặc đặt sàn",
+        },
+    ];
 
 /* ─── Room presets ─── */
 const ROOM_PRESETS: {
     id: string; name: string; icon: React.ReactNode; description: string;
     suggestions: { productId: string; qty: number }[];
 }[] = [
-    {
-        id: "phong-ngu-master", name: "Phòng Ngủ Master", icon: <Bed size={28} />,
-        description: "Phòng ngủ chính cho vợ chồng (15-20m²)",
-        suggestions: [
-            { productId: "tu-quan-ao", qty: 1.8 },
-            { productId: "giuong", qty: 1.8 },
-            { productId: "ke-tivi", qty: 1.4 },
-        ],
-    },
-    {
-        id: "phong-ngu-nho", name: "Phòng Ngủ Nhỏ", icon: <Bed size={28} />,
-        description: "Phòng ngủ con, phòng khách (10-14m²)",
-        suggestions: [
-            { productId: "tu-quan-ao", qty: 1.0 },
-            { productId: "giuong", qty: 1.6 },
-        ],
-    },
-    {
-        id: "phong-ngu-tre-em", name: "Phòng Ngủ Trẻ Em", icon: <BookOpen size={28} />,
-        description: "Phòng ngủ và học tập cho bé (10-14m²)",
-        suggestions: [
-            { productId: "tu-quan-ao", qty: 1.0 },
-            { productId: "giuong", qty: 1.6 },
-            { productId: "ban-hoc", qty: 1 },
-        ],
-    },
-    {
-        id: "nha-bep", name: "Nhà Bếp", icon: <CookingPot size={28} />,
-        description: "Bếp gia đình tiêu chuẩn (6-12m²)",
-        suggestions: [
-            { productId: "tu-bep-tren", qty: 2.5 },
-            { productId: "tu-bep-duoi", qty: 2.5 },
-        ],
-    },
-];
+        {
+            id: "phong-ngu-master", name: "Phòng Ngủ Master", icon: <Bed size={28} />,
+            description: "Phòng ngủ chính cho vợ chồng (15-20m²)",
+            suggestions: [
+                { productId: "tu-quan-ao", qty: 1.8 },
+                { productId: "giuong", qty: 1.8 },
+                { productId: "ke-tivi", qty: 1.4 },
+            ],
+        },
+        {
+            id: "phong-ngu-nho", name: "Phòng Ngủ Nhỏ", icon: <Bed size={28} />,
+            description: "Phòng ngủ con, phòng khách (10-14m²)",
+            suggestions: [
+                { productId: "tu-quan-ao", qty: 1.0 },
+                { productId: "giuong", qty: 1.6 },
+            ],
+        },
+        {
+            id: "phong-ngu-tre-em", name: "Phòng Ngủ Trẻ Em", icon: <BookOpen size={28} />,
+            description: "Phòng ngủ và học tập cho bé (10-14m²)",
+            suggestions: [
+                { productId: "tu-quan-ao", qty: 1.0 },
+                { productId: "giuong", qty: 1.6 },
+                { productId: "ban-hoc", qty: 1 },
+            ],
+        },
+        {
+            id: "nha-bep", name: "Nhà Bếp", icon: <CookingPot size={28} />,
+            description: "Bếp gia đình tiêu chuẩn (6-12m²)",
+            suggestions: [
+                { productId: "tu-bep-tren", qty: 2.5 },
+                { productId: "tu-bep-duoi", qty: 2.5 },
+            ],
+        },
+    ];
 
 /* ─── Types ─── */
 interface CartItem {
@@ -132,7 +142,7 @@ function useCountUp(target: number, duration = 500) {
 
 /* ─── Main Component ─── */
 export default function EstimationToolPage() {
-    const [activeTab, setActiveTab] = useState<"single" | "room">("single");
+    const [activeTab, setActiveTab] = useState<"single" | "room" | "kitchen3d">("single");
     const [cart, setCart] = useState<CartItem[]>([]);
     const [globalMaterial, setGlobalMaterial] = useState<MaterialId>("caocap");
     const [showPopup, setShowPopup] = useState(false);
@@ -223,7 +233,7 @@ export default function EstimationToolPage() {
             setSubmitted(true);
         } catch (err) {
             console.error("Failed to send lead:", err);
-            setSendError("Gửi thất bại. Vui lòng gọi trực tiếp 086.518.2562");
+            setSendError("Gửi thất bại. Vui lòng gọi trực tiếp 0975.211.796");
         } finally {
             setSending(false);
         }
@@ -258,18 +268,27 @@ export default function EstimationToolPage() {
             <div className="container mx-auto px-4 -mt-6 relative z-10">
                 {/* Tab Switcher */}
                 <div className="flex justify-center mb-8">
-                    <div className="bg-white rounded-2xl p-1.5 shadow-lg border border-slate-200 inline-flex">
+                    <div className="bg-white rounded-2xl p-1.5 shadow-lg border border-slate-200 inline-flex flex-wrap gap-1">
                         <button
                             onClick={() => setActiveTab("single")}
-                            className={`px-6 py-3 rounded-xl font-bold text-sm transition-all ${activeTab === "single" ? "bg-orange-500 text-white shadow-md" : "text-slate-600 hover:text-orange-500"}`}
+                            className={`px-5 py-3 rounded-xl font-bold text-sm transition-all ${activeTab === "single" ? "bg-orange-500 text-white shadow-md" : "text-slate-600 hover:text-orange-500"}`}
                         >
                             <span className="flex items-center gap-2"><Calculator size={16} /> Tính Theo Món Lẻ</span>
                         </button>
                         <button
                             onClick={() => setActiveTab("room")}
-                            className={`px-6 py-3 rounded-xl font-bold text-sm transition-all ${activeTab === "room" ? "bg-orange-500 text-white shadow-md" : "text-slate-600 hover:text-orange-500"}`}
+                            className={`px-5 py-3 rounded-xl font-bold text-sm transition-all ${activeTab === "room" ? "bg-orange-500 text-white shadow-md" : "text-slate-600 hover:text-orange-500"}`}
                         >
                             <span className="flex items-center gap-2"><Home size={16} /> Tính Theo Phòng</span>
+                        </button>
+                        <button
+                            onClick={() => setActiveTab("kitchen3d")}
+                            className={`px-5 py-3 rounded-xl font-bold text-sm transition-all ${activeTab === "kitchen3d" ? "bg-slate-900 text-orange-400 shadow-md" : "text-slate-600 hover:text-slate-800"}`}
+                        >
+                            <span className="flex items-center gap-2">
+                                🍳 Configurator Bếp 3D
+                                <span className="text-[10px] bg-orange-500 text-white px-1.5 py-0.5 rounded-full">MỚI</span>
+                            </span>
                         </button>
                     </div>
                 </div>
@@ -285,7 +304,7 @@ export default function EstimationToolPage() {
                                 className={`p-4 rounded-xl border-2 text-left transition-all ${globalMaterial === m.id
                                     ? "border-orange-500 bg-orange-50 shadow-md"
                                     : "border-slate-200 bg-white hover:border-orange-300"
-                                }`}
+                                    }`}
                             >
                                 <span className={`font-bold ${globalMaterial === m.id ? "text-orange-600" : "text-slate-800"}`}>{m.name}</span>
                                 {m.id === "caocap" && <span className="ml-2 text-xs bg-orange-500 text-white px-2 py-0.5 rounded-full">Phổ biến nhất</span>}
@@ -294,238 +313,246 @@ export default function EstimationToolPage() {
                     </div>
                 </div>
 
-                <div className="flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto">
-                    {/* Left: Product Selection */}
-                    <div className="flex-1">
-                        {activeTab === "single" ? (
-                            <div>
-                                <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-                                    <Calculator size={20} className="text-orange-500" /> Chọn sản phẩm cần dự toán
-                                </h2>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    {PRODUCTS.map(product => {
-                                        const inCart = cart.some(i => i.productId === product.id);
-                                        return (
-                                            <button
-                                                key={product.id}
-                                                onClick={() => addToCart(product.id)}
-                                                className={`p-4 rounded-2xl border-2 text-left transition-all hover:shadow-md group ${inCart ? "border-green-500 bg-green-50" : "border-slate-200 bg-white hover:border-orange-400"}`}
-                                            >
-                                                <div className="flex items-start gap-3">
-                                                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${inCart ? "bg-green-100 text-green-600" : "bg-orange-100 text-orange-600"}`}>
-                                                        {product.icon}
-                                                    </div>
-                                                    <div className="flex-1 min-w-0">
-                                                        <h3 className="font-bold text-slate-900 text-sm">{product.name}</h3>
-                                                        <p className="text-xs text-slate-500 mt-0.5">{product.description}</p>
-                                                        <p className="text-orange-500 font-bold text-sm mt-1">
-                                                            {formatVND(product.prices[globalMaterial])} / {product.unit}
-                                                        </p>
-                                                    </div>
-                                                    <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 ${inCart ? "bg-green-500 text-white" : "bg-slate-100 text-slate-400 group-hover:bg-orange-100 group-hover:text-orange-500"}`}>
-                                                        {inCart ? <Check size={14} /> : <Plus size={14} />}
-                                                    </div>
-                                                </div>
-                                            </button>
-                                        );
-                                    })}
-                                </div>
-                            </div>
-                        ) : (
-                            <div className="space-y-6">
-                                <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-                                    <Sparkles size={20} className="text-orange-500" /> Nhập kích thước & chọn phòng
-                                </h2>
-
-                                {/* Room Dimension Inputs */}
-                                <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
-                                    <h3 className="font-bold text-slate-800 mb-4 text-sm">📏 Kích thước phòng (mét)</h3>
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <div>
-                                            <label className="block text-xs font-medium text-slate-500 mb-1.5">Chiều dài</label>
-                                            <div className="flex items-center">
-                                                <input type="range" min="2" max="8" step="0.5" value={roomLength}
-                                                    onChange={e => setRoomLength(Number(e.target.value))}
-                                                    className="flex-1 accent-orange-500 h-2"
-                                                />
-                                                <span className="ml-3 bg-orange-50 text-orange-600 font-extrabold px-3 py-1.5 rounded-lg text-sm min-w-[60px] text-center">{roomLength}m</span>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <label className="block text-xs font-medium text-slate-500 mb-1.5">Chiều rộng</label>
-                                            <div className="flex items-center">
-                                                <input type="range" min="2" max="7" step="0.5" value={roomWidth}
-                                                    onChange={e => setRoomWidth(Number(e.target.value))}
-                                                    className="flex-1 accent-orange-500 h-2"
-                                                />
-                                                <span className="ml-3 bg-orange-50 text-orange-600 font-extrabold px-3 py-1.5 rounded-lg text-sm min-w-[60px] text-center">{roomWidth}m</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="mt-3 text-center">
-                                        <span className="text-sm text-slate-500">Diện tích: </span>
-                                        <span className="font-extrabold text-orange-500 text-lg">{(roomLength * roomWidth).toFixed(1)} m²</span>
-                                    </div>
-                                </div>
-
-                                {/* Room Type Selector */}
-                                <div className="grid grid-cols-2 gap-3">
-                                    {ROOM_PRESETS.map(room => (
-                                        <button
-                                            key={room.id}
-                                            onClick={() => applyRoomPreset(room.id)}
-                                            className={`p-4 rounded-2xl border-2 text-left transition-all group ${
-                                                selectedRoom === room.id
-                                                    ? "border-orange-500 bg-orange-50 shadow-md"
-                                                    : "border-slate-200 bg-white hover:border-orange-400 hover:shadow-md"
-                                            }`}
-                                        >
-                                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-2 transition-colors ${
-                                                selectedRoom === room.id
-                                                    ? "bg-orange-500 text-white"
-                                                    : "bg-orange-100 text-orange-600 group-hover:bg-orange-500 group-hover:text-white"
-                                            }`}>
-                                                {room.icon}
-                                            </div>
-                                            <h3 className="font-bold text-slate-900 text-sm">{room.name}</h3>
-                                            <p className="text-xs text-slate-500 mt-0.5">{room.description}</p>
-                                        </button>
-                                    ))}
-                                </div>
-
-                                {/* Floor Plan / 3D Preview */}
-                                {selectedRoom && (
-                                    <div>
-                                        {/* 2D / 3D Toggle */}
-                                        <div className="flex items-center gap-2 mb-3">
-                                            <button
-                                                onClick={() => setView3D(false)}
-                                                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold transition-all ${
-                                                    !view3D
-                                                        ? "bg-orange-500 text-white shadow-md"
-                                                        : "bg-white border border-slate-200 text-slate-600 hover:border-orange-300"
-                                                }`}
-                                            >
-                                                📐 Sơ Đồ 2D
-                                            </button>
-                                            <button
-                                                onClick={() => setView3D(true)}
-                                                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold transition-all ${
-                                                    view3D
-                                                        ? "bg-slate-800 text-orange-400 shadow-md"
-                                                        : "bg-white border border-slate-200 text-slate-600 hover:border-slate-400"
-                                                }`}
-                                            >
-                                                🧊 Mô Hình 3D
-                                                <span className="ml-1 text-[10px] bg-orange-500 text-white px-1.5 py-0.5 rounded-full">MỚI</span>
-                                            </button>
-                                        </div>
-
-                                        {/* View */}
-                                        {view3D ? (
-                                            <Room3DViewer
-                                                roomWidth={roomLength}
-                                                roomDepth={roomWidth}
-                                                roomType={selectedRoom}
-                                            />
-                                        ) : (
-                                            <FloorPlan2D
-                                                roomWidth={roomLength}
-                                                roomHeight={roomWidth}
-                                                roomType={selectedRoom}
-                                            />
-                                        )}
-                                    </div>
-                                )}
-                            </div>
-                        )}
+                {/* Kitchen 3D Configurator Tab */}
+                {activeTab === "kitchen3d" && (
+                    <div className="max-w-7xl mx-auto">
+                        <div className="mb-4 text-center">
+                            <p className="text-slate-500 text-sm">Thiết kế bếp theo thông số thực tế — Báo giá tự động theo vật liệu nhựa</p>
+                        </div>
+                        <KitchenConfigurator3D />
                     </div>
+                )}
 
-                    {/* Right: Cart / Summary */}
-                    <div className="w-full lg:w-96 shrink-0">
-                        <div className="bg-white rounded-3xl shadow-lg border border-slate-200 sticky top-24 overflow-hidden">
-                            <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-5 text-white">
-                                <h3 className="font-bold text-lg flex items-center gap-2">
-                                    <Calculator size={20} /> Giỏ Dự Toán
-                                </h3>
-                                <p className="text-orange-100 text-sm mt-1">{cart.length} sản phẩm đã chọn</p>
-                            </div>
-
-                            <div className="p-5 max-h-[400px] overflow-y-auto">
-                                {cart.length === 0 ? (
-                                    <div className="text-center py-8 text-slate-400">
-                                        <Calculator size={40} className="mx-auto mb-3 opacity-30" />
-                                        <p className="text-sm">Chưa có sản phẩm nào.<br />Chọn sản phẩm bên trái để bắt đầu.</p>
-                                    </div>
-                                ) : (
-                                    <div className="space-y-4">
-                                        {cart.map((item, idx) => {
-                                            const product = PRODUCTS.find(p => p.id === item.productId)!;
-                                            const itemTotal = product.prices[item.material] * item.qty;
+                {activeTab !== "kitchen3d" && (
+                    <div className="flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto">
+                        {/* Left: Product Selection */}
+                        <div className="flex-1">
+                            {activeTab === "single" ? (
+                                <div>
+                                    <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                                        <Calculator size={20} className="text-orange-500" /> Chọn sản phẩm cần dự toán
+                                    </h2>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        {PRODUCTS.map(product => {
+                                            const inCart = cart.some(i => i.productId === product.id);
                                             return (
-                                                <div key={idx} className="bg-slate-50 rounded-xl p-3 border border-slate-100">
-                                                    <div className="flex items-start justify-between mb-2">
-                                                        <div>
-                                                            <h4 className="font-bold text-slate-900 text-sm">{product.name}</h4>
-                                                            <p className="text-xs text-slate-500">{MATERIALS.find(m => m.id === item.material)?.shortName}</p>
+                                                <button
+                                                    key={product.id}
+                                                    onClick={() => addToCart(product.id)}
+                                                    className={`p-4 rounded-2xl border-2 text-left transition-all hover:shadow-md group ${inCart ? "border-green-500 bg-green-50" : "border-slate-200 bg-white hover:border-orange-400"}`}
+                                                >
+                                                    <div className="flex items-start gap-3">
+                                                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${inCart ? "bg-green-100 text-green-600" : "bg-orange-100 text-orange-600"}`}>
+                                                            {product.icon}
                                                         </div>
-                                                        <button onClick={() => removeItem(idx)} className="text-slate-400 hover:text-red-500 transition-colors p-1">
-                                                            <Trash2 size={14} />
-                                                        </button>
-                                                    </div>
-                                                    <div className="flex items-center justify-between">
-                                                        <div className="flex items-center gap-2 bg-white rounded-lg border border-slate-200 p-0.5">
-                                                            <button onClick={() => updateQty(idx, item.qty - product.step)} className="w-7 h-7 flex items-center justify-center rounded-md hover:bg-slate-100 text-slate-600">
-                                                                <Minus size={14} />
-                                                            </button>
-                                                            <span className="font-extrabold text-base w-12 text-center text-slate-900">{item.qty}</span>
-                                                            <button onClick={() => updateQty(idx, item.qty + product.step)} className="w-7 h-7 flex items-center justify-center rounded-md hover:bg-slate-100 text-slate-600">
-                                                                <Plus size={14} />
-                                                            </button>
-                                                            <span className="text-xs text-slate-400 pr-1">{product.unit}</span>
+                                                        <div className="flex-1 min-w-0">
+                                                            <h3 className="font-bold text-slate-900 text-sm">{product.name}</h3>
+                                                            <p className="text-xs text-slate-500 mt-0.5">{product.description}</p>
+                                                            <p className="text-orange-500 font-bold text-sm mt-1">
+                                                                {formatVND(product.prices[globalMaterial])} / {product.unit}
+                                                            </p>
                                                         </div>
-                                                        <span className="font-bold text-orange-500 text-sm">{formatVND(itemTotal)}</span>
+                                                        <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 ${inCart ? "bg-green-500 text-white" : "bg-slate-100 text-slate-400 group-hover:bg-orange-100 group-hover:text-orange-500"}`}>
+                                                            {inCart ? <Check size={14} /> : <Plus size={14} />}
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                </button>
                                             );
                                         })}
                                     </div>
-                                )}
-                            </div>
-
-                            {/* Total Section */}
-                            <div className="border-t border-slate-200 p-5 bg-slate-50">
-                                <div className="flex justify-between items-center mb-4">
-                                    <span className="text-slate-700 font-medium">Tổng dự toán:</span>
-                                    <span className="text-2xl font-extrabold text-orange-500">
-                                        {formatVND(animatedTotal)}
-                                    </span>
                                 </div>
-                                <p className="text-xs text-slate-400 mb-4 italic">* Giá tham khảo. Giá chính xác sau khảo sát thực tế tại nhà.</p>
+                            ) : (
+                                <div className="space-y-6">
+                                    <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+                                        <Sparkles size={20} className="text-orange-500" /> Nhập kích thước & chọn phòng
+                                    </h2>
 
-                                <button
-                                    onClick={() => cart.length > 0 && setShowPopup(true)}
-                                    disabled={cart.length === 0}
-                                    className={`w-full py-3.5 rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-all ${cart.length > 0
-                                        ? "bg-orange-500 hover:bg-orange-600 text-white shadow-lg shadow-orange-500/30 hover:scale-[1.02]"
-                                        : "bg-slate-200 text-slate-400 cursor-not-allowed"
-                                    }`}
-                                >
-                                    <Send size={18} /> Nhận Báo Giá Chi Tiết
-                                </button>
+                                    {/* Room Dimension Inputs */}
+                                    <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
+                                        <h3 className="font-bold text-slate-800 mb-4 text-sm">📏 Kích thước phòng (mét)</h3>
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <label className="block text-xs font-medium text-slate-500 mb-1.5">Chiều dài</label>
+                                                <div className="flex items-center">
+                                                    <input type="range" min="2" max="8" step="0.5" value={roomLength}
+                                                        onChange={e => setRoomLength(Number(e.target.value))}
+                                                        className="flex-1 accent-orange-500 h-2"
+                                                    />
+                                                    <span className="ml-3 bg-orange-50 text-orange-600 font-extrabold px-3 py-1.5 rounded-lg text-sm min-w-[60px] text-center">{roomLength}m</span>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label className="block text-xs font-medium text-slate-500 mb-1.5">Chiều rộng</label>
+                                                <div className="flex items-center">
+                                                    <input type="range" min="2" max="7" step="0.5" value={roomWidth}
+                                                        onChange={e => setRoomWidth(Number(e.target.value))}
+                                                        className="flex-1 accent-orange-500 h-2"
+                                                    />
+                                                    <span className="ml-3 bg-orange-50 text-orange-600 font-extrabold px-3 py-1.5 rounded-lg text-sm min-w-[60px] text-center">{roomWidth}m</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="mt-3 text-center">
+                                            <span className="text-sm text-slate-500">Diện tích: </span>
+                                            <span className="font-extrabold text-orange-500 text-lg">{(roomLength * roomWidth).toFixed(1)} m²</span>
+                                        </div>
+                                    </div>
 
-                                <div className="mt-3 grid grid-cols-2 gap-2">
-                                    <a href="https://zalo.me/0865182562" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-1.5 bg-[#0068FF] text-white py-2.5 rounded-xl text-sm font-medium hover:bg-[#005AE0] transition-colors">
-                                        <MessageCircle size={14} /> Zalo
-                                    </a>
-                                    <a href="tel:0865182562" className="flex items-center justify-center gap-1.5 bg-green-500 text-white py-2.5 rounded-xl text-sm font-medium hover:bg-green-600 transition-colors">
-                                        <Phone size={14} /> 086.518.2562
-                                    </a>
+                                    {/* Room Type Selector */}
+                                    <div className="grid grid-cols-2 gap-3">
+                                        {ROOM_PRESETS.map(room => (
+                                            <button
+                                                key={room.id}
+                                                onClick={() => applyRoomPreset(room.id)}
+                                                className={`p-4 rounded-2xl border-2 text-left transition-all group ${selectedRoom === room.id
+                                                        ? "border-orange-500 bg-orange-50 shadow-md"
+                                                        : "border-slate-200 bg-white hover:border-orange-400 hover:shadow-md"
+                                                    }`}
+                                            >
+                                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-2 transition-colors ${selectedRoom === room.id
+                                                        ? "bg-orange-500 text-white"
+                                                        : "bg-orange-100 text-orange-600 group-hover:bg-orange-500 group-hover:text-white"
+                                                    }`}>
+                                                    {room.icon}
+                                                </div>
+                                                <h3 className="font-bold text-slate-900 text-sm">{room.name}</h3>
+                                                <p className="text-xs text-slate-500 mt-0.5">{room.description}</p>
+                                            </button>
+                                        ))}
+                                    </div>
+
+                                    {/* Floor Plan / 3D Preview */}
+                                    {selectedRoom && (
+                                        <div>
+                                            {/* 2D / 3D Toggle */}
+                                            <div className="flex items-center gap-2 mb-3">
+                                                <button
+                                                    onClick={() => setView3D(false)}
+                                                    className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold transition-all ${!view3D
+                                                            ? "bg-orange-500 text-white shadow-md"
+                                                            : "bg-white border border-slate-200 text-slate-600 hover:border-orange-300"
+                                                        }`}
+                                                >
+                                                    📐 Sơ Đồ 2D
+                                                </button>
+                                                <button
+                                                    onClick={() => setView3D(true)}
+                                                    className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold transition-all ${view3D
+                                                            ? "bg-slate-800 text-orange-400 shadow-md"
+                                                            : "bg-white border border-slate-200 text-slate-600 hover:border-slate-400"
+                                                        }`}
+                                                >
+                                                    🧊 Mô Hình 3D
+                                                    <span className="ml-1 text-[10px] bg-orange-500 text-white px-1.5 py-0.5 rounded-full">MỚI</span>
+                                                </button>
+                                            </div>
+
+                                            {/* View */}
+                                            {view3D ? (
+                                                <Room3DViewer
+                                                    roomWidth={roomLength}
+                                                    roomDepth={roomWidth}
+                                                    roomType={selectedRoom}
+                                                />
+                                            ) : (
+                                                <FloorPlan2D
+                                                    roomWidth={roomLength}
+                                                    roomHeight={roomWidth}
+                                                    roomType={selectedRoom}
+                                                />
+                                            )}
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Right: Cart / Summary */}
+                        <div className="w-full lg:w-96 shrink-0">
+                            <div className="bg-white rounded-3xl shadow-lg border border-slate-200 sticky top-24 overflow-hidden">
+                                <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-5 text-white">
+                                    <h3 className="font-bold text-lg flex items-center gap-2">
+                                        <Calculator size={20} /> Giỏ Dự Toán
+                                    </h3>
+                                    <p className="text-orange-100 text-sm mt-1">{cart.length} sản phẩm đã chọn</p>
+                                </div>
+
+                                <div className="p-5 max-h-[400px] overflow-y-auto">
+                                    {cart.length === 0 ? (
+                                        <div className="text-center py-8 text-slate-400">
+                                            <Calculator size={40} className="mx-auto mb-3 opacity-30" />
+                                            <p className="text-sm">Chưa có sản phẩm nào.<br />Chọn sản phẩm bên trái để bắt đầu.</p>
+                                        </div>
+                                    ) : (
+                                        <div className="space-y-4">
+                                            {cart.map((item, idx) => {
+                                                const product = PRODUCTS.find(p => p.id === item.productId)!;
+                                                const itemTotal = product.prices[item.material] * item.qty;
+                                                return (
+                                                    <div key={idx} className="bg-slate-50 rounded-xl p-3 border border-slate-100">
+                                                        <div className="flex items-start justify-between mb-2">
+                                                            <div>
+                                                                <h4 className="font-bold text-slate-900 text-sm">{product.name}</h4>
+                                                                <p className="text-xs text-slate-500">{MATERIALS.find(m => m.id === item.material)?.shortName}</p>
+                                                            </div>
+                                                            <button onClick={() => removeItem(idx)} className="text-slate-400 hover:text-red-500 transition-colors p-1">
+                                                                <Trash2 size={14} />
+                                                            </button>
+                                                        </div>
+                                                        <div className="flex items-center justify-between">
+                                                            <div className="flex items-center gap-2 bg-white rounded-lg border border-slate-200 p-0.5">
+                                                                <button onClick={() => updateQty(idx, item.qty - product.step)} className="w-7 h-7 flex items-center justify-center rounded-md hover:bg-slate-100 text-slate-600">
+                                                                    <Minus size={14} />
+                                                                </button>
+                                                                <span className="font-extrabold text-base w-12 text-center text-slate-900">{item.qty}</span>
+                                                                <button onClick={() => updateQty(idx, item.qty + product.step)} className="w-7 h-7 flex items-center justify-center rounded-md hover:bg-slate-100 text-slate-600">
+                                                                    <Plus size={14} />
+                                                                </button>
+                                                                <span className="text-xs text-slate-400 pr-1">{product.unit}</span>
+                                                            </div>
+                                                            <span className="font-bold text-orange-500 text-sm">{formatVND(itemTotal)}</span>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Total Section */}
+                                <div className="border-t border-slate-200 p-5 bg-slate-50">
+                                    <div className="flex justify-between items-center mb-4">
+                                        <span className="text-slate-700 font-medium">Tổng dự toán:</span>
+                                        <span className="text-2xl font-extrabold text-orange-500">
+                                            {formatVND(animatedTotal)}
+                                        </span>
+                                    </div>
+                                    <p className="text-xs text-slate-400 mb-4 italic">* Giá tham khảo. Giá chính xác sau khảo sát thực tế tại nhà.</p>
+
+                                    <button
+                                        onClick={() => cart.length > 0 && setShowPopup(true)}
+                                        disabled={cart.length === 0}
+                                        className={`w-full py-3.5 rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-all ${cart.length > 0
+                                            ? "bg-orange-500 hover:bg-orange-600 text-white shadow-lg shadow-orange-500/30 hover:scale-[1.02]"
+                                            : "bg-slate-200 text-slate-400 cursor-not-allowed"
+                                            }`}
+                                    >
+                                        <Send size={18} /> Nhận Báo Giá Chi Tiết
+                                    </button>
+
+                                    <div className="mt-3 grid grid-cols-2 gap-2">
+                                        <a href="https://zalo.me/0865182562" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-1.5 bg-[#0068FF] text-white py-2.5 rounded-xl text-sm font-medium hover:bg-[#005AE0] transition-colors">
+                                            <MessageCircle size={14} /> Zalo
+                                        </a>
+                                        <a href="tel:0865182562" className="flex items-center justify-center gap-1.5 bg-green-500 text-white py-2.5 rounded-xl text-sm font-medium hover:bg-green-600 transition-colors">
+                                            <Phone size={14} /> 0975.211.796
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                )}{/* end activeTab !== kitchen3d */}
 
                 {/* Trust Section */}
                 <div className="max-w-4xl mx-auto mt-16 text-center">
@@ -593,7 +620,7 @@ export default function EstimationToolPage() {
                                     className={`w-full py-3.5 rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-all ${phone.length >= 9 && !sending
                                         ? "bg-orange-500 hover:bg-orange-600 text-white shadow-lg"
                                         : "bg-slate-200 text-slate-400 cursor-not-allowed"
-                                    }`}
+                                        }`}
                                 >
                                     {sending ? (
                                         <><span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span> Đang gửi...</>

@@ -1,11 +1,9 @@
 import { Check } from "lucide-react";
 
 const tuQuanAo = [
-    { name: "Tủ Quần Áo 2 Cánh", size: "200 × 100 × 50 cm", priceStd: "2.990.000", pricePre: "3.273.000" },
-    { name: "Tủ Quần Áo 3 Cánh", size: "200 × 136 × 50 cm", priceStd: "3.727.000", pricePre: "4.273.000" },
-    { name: "Tủ Quần Áo 4 Cánh", size: "200 × 181.5 × 50 cm", priceStd: "5.000.000", pricePre: "5.727.000" },
-    { name: "Tủ Quần Áo 5 Cánh", size: "200 × 225 × 50 cm", priceStd: "5.818.000", pricePre: "6.545.000" },
-    { name: "Tủ Quần Áo 6 Cánh", size: "200 × 270 × 50 cm", priceStd: "6.636.000", pricePre: "7.364.000" },
+    { name: "Tủ Quần Áo 2 Cánh", size: "1800 × 800 mm", golden: "1.200.000", penco: "1.900.000", ecoplast: "2.500.000", chinhue: "2.650.000" },
+    { name: "Tủ Quần Áo 3 Cánh", size: "1900 × 1200 mm", golden: "1.950.000", penco: "2.800.000", ecoplast: "3.650.000", chinhue: "3.800.000" },
+    { name: "Tủ Quần Áo 4 Cánh", size: "1900 × 1600 mm", golden: "2.800.000", penco: "3.950.000", ecoplast: "4.900.000", chinhue: "5.000.000" },
 ];
 
 const giuongNgu = [
@@ -33,22 +31,26 @@ export default function PricingSection() {
                         Bảng Giá Tủ Quần Áo Lắp Ghép Đóng Sẵn
                     </h3>
                     <div className="overflow-x-auto rounded-2xl border border-slate-200 shadow-lg">
-                        <table className="w-full text-left">
+                        <table className="w-full text-left min-w-[800px]">
                             <thead>
-                                <tr className="bg-gradient-to-r from-orange-500 to-orange-600 text-white">
+                                <tr className="bg-gradient-to-r from-orange-500 to-orange-600 text-white whitespace-nowrap">
                                     <th className="py-4 px-6 font-bold">Loại sản phẩm</th>
-                                    <th className="py-4 px-6 font-bold">Kích thước</th>
-                                    <th className="py-4 px-6 font-bold text-center">Nhựa Thường (VNĐ)</th>
-                                    <th className="py-4 px-6 font-bold text-center">Nhựa Cao Cấp (VNĐ)</th>
+                                    <th className="py-4 px-6 font-bold">Kích thước (C x R)</th>
+                                    <th className="py-4 px-6 font-bold text-center">Golden</th>
+                                    <th className="py-4 px-6 font-bold text-center">Pencô</th>
+                                    <th className="py-4 px-6 font-bold text-center">Ecoplast</th>
+                                    <th className="py-4 px-6 font-bold text-center">Chinhue</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {tuQuanAo.map((item, idx) => (
-                                    <tr key={idx} className={`border-b border-slate-100 ${idx % 2 === 0 ? "bg-white" : "bg-slate-50"} hover:bg-orange-50 transition-colors`}>
+                                    <tr key={idx} className={`border-b border-slate-100 ${idx % 2 === 0 ? "bg-white" : "bg-slate-50"} hover:bg-orange-50 transition-colors whitespace-nowrap`}>
                                         <td className="py-4 px-6 font-medium text-slate-900">{item.name}</td>
                                         <td className="py-4 px-6 text-slate-600">{item.size}</td>
-                                        <td className="py-4 px-6 text-center font-semibold text-slate-800">{item.priceStd}</td>
-                                        <td className="py-4 px-6 text-center font-bold text-orange-600">{item.pricePre}</td>
+                                        <td className="py-4 px-6 text-center font-semibold text-slate-800">{item.golden}</td>
+                                        <td className="py-4 px-6 text-center font-semibold text-slate-800">{item.penco}</td>
+                                        <td className="py-4 px-6 text-center font-bold text-orange-600">{item.ecoplast}</td>
+                                        <td className="py-4 px-6 text-center font-bold text-orange-600">{item.chinhue}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -127,7 +129,7 @@ export default function PricingSection() {
 
                 <div className="mt-12 text-center max-w-3xl mx-auto bg-blue-50 p-6 rounded-2xl border border-blue-100">
                     <p className="text-slate-700 italic">
-                        * Giá trên chưa bao gồm VAT và chi phí vận chuyển, bốc hàng tại xưởng. Hàng đặt theo yêu cầu riêng có thể chênh lệch 5-10%. Liên hệ Hotline <strong>086.518.2562</strong> hoặc Zalo để nhận báo giá chính xác nhất.
+                        * Giá trên chưa bao gồm VAT và chi phí vận chuyển, bốc hàng tại xưởng. Hàng đặt theo yêu cầu riêng có thể chênh lệch 5-10%. Liên hệ Hotline <strong>0975.211.796 — 0988.104.659</strong> hoặc Zalo để nhận báo giá chính xác nhất.
                     </p>
                 </div>
             </div>

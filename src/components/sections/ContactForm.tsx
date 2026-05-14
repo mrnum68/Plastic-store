@@ -43,7 +43,7 @@ export default function ContactForm() {
             if (!res.ok) throw new Error("Failed");
             setSent(true);
         } catch {
-            setError("Gửi thất bại. Vui lòng gọi 086.518.2562");
+            setError("Gửi thất bại. Vui lòng gọi 0975.211.796");
         } finally {
             setSending(false);
         }
@@ -108,11 +108,10 @@ export default function ContactForm() {
                                 <button
                                     type="submit"
                                     disabled={phone.length < 9 || sending}
-                                    className={`w-full font-bold text-lg py-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 ${
-                                        phone.length >= 9 && !sending
+                                    className={`w-full font-bold text-lg py-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 ${phone.length >= 9 && !sending
                                             ? "bg-orange-500 hover:bg-orange-600 text-white shadow-orange-500/30 active:scale-95"
                                             : "bg-slate-200 text-slate-400 cursor-not-allowed"
-                                    }`}
+                                        }`}
                                 >
                                     {sending ? (
                                         <><span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span> Đang gửi...</>

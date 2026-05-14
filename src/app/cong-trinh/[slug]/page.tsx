@@ -7,7 +7,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     const params = await props.params;
     const data = PROJECTS_DATA[params.slug];
     if (!data) return { title: "Dự Án Không Tồn Tại" };
-    
+
     return {
         title: `Dự Án: ${data.title} - Thi Công Nội Thất Nhựa Huy Hoàng`,
         description: `Xem chi tiết quá trình thiết kế và thi công dự án ${data.title}. Giải pháp chống mối mọt, chống nước 100% bằng nhựa Ecoplast cao cấp.`,
@@ -136,7 +136,7 @@ export default async function ProjectDetailPage(props: { params: Promise<{ slug:
                                         Nhận Báo Giá Mẫu Này
                                     </a>
                                     <a href="tel:0865182562" className="w-full flex items-center justify-center gap-2 border-2 border-white/40 hover:bg-white/10 font-bold py-3.5 rounded-xl transition-colors">
-                                        <Phone size={18} /> Hotline: 086.518.2562
+                                        <Phone size={18} /> Hotline: 0975.211.796
                                     </a>
                                 </div>
                             </div>

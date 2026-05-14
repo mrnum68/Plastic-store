@@ -12,7 +12,7 @@ export default function Footer() {
                         Xưởng sản xuất nội thất nhựa cao cấp Ecoplast / Penco / Casawood / Golden Plast. Thi công trọn gói từ xưởng, không qua trung gian.
                     </p>
                     <p>📍 Xưởng sản xuất: 400 Nguyễn Lương Bằng, Liên Chiểu, Đà Nẵng</p>
-                    <p>📞 Hotline: 086.518.2562</p>
+                    <p>📞 Hotline: 0975.211.796</p>
                 </div>
                 <div>
                     <h3 className="text-white font-bold text-lg mb-4">Danh Mục Sản Phẩm</h3>

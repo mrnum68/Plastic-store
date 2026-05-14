@@ -199,7 +199,7 @@ export default function ProductsPage() {
                         <p className="text-white/90 mb-6 max-w-lg mx-auto">Xưởng Huy Hoàng nhận thiết kế và thi công 100% theo yêu cầu kích thước, màu sắc, kiểu dáng. Liên hệ ngay để được tư vấn miễn phí!</p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <a href="https://zalo.me/0865182562" target="_blank" rel="noopener noreferrer" className="bg-white text-orange-600 font-bold px-8 py-3.5 rounded-full hover:bg-orange-50 transition-colors">Nhắn Zalo Báo Giá</a>
-                            <a href="tel:0865182562" className="border-2 border-white text-white font-bold px-8 py-3.5 rounded-full hover:bg-white/10 transition-colors">Gọi 086.518.2562</a>
+                            <a href="tel:0865182562" className="border-2 border-white text-white font-bold px-8 py-3.5 rounded-full hover:bg-white/10 transition-colors">Gọi 0975.211.796</a>
                         </div>
                     </div>
                 </section>

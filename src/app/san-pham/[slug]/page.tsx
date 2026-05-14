@@ -262,7 +262,7 @@ export default async function ProductDetailPage(props: { params: Promise<{ slug:
                                     <MessageCircle size={22} /> Nhận Tư Vấn Zalo
                                 </a>
                                 <a href="tel:0865182562" className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-4 px-6 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 transition-transform hover:scale-[1.02] shadow-lg shadow-orange-500/30">
-                                    <Phone size={22} className="animate-pulse" /> 086.518.2562
+                                    <Phone size={22} className="animate-pulse" /> 0975.211.796
                                 </a>
                             </div>
                         </div>

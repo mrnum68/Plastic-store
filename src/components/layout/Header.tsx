@@ -46,7 +46,7 @@ export default function Header() {
             className="hidden sm:flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full font-medium transition-colors"
           >
             <Phone size={18} />
-            <span>086.518.2562</span>
+            <span>0975.211.796</span>
           </a>
           <button
             className="md:hidden text-slate-600 hover:text-orange-500 transition-colors"
@@ -85,7 +85,7 @@ export default function Header() {
             href="tel:0865182562"
             className="flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl font-bold transition-colors"
           >
-            <Phone size={18} /> Gọi 086.518.2562
+            <Phone size={18} /> Gọi 0975.211.796
           </a>
         </nav>
       </div>
