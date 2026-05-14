@@ -34,20 +34,24 @@ interface UIModule {
 }
 
 const DEFAULT_LOWER: UIModule[] = [
-  { id: 'l1', type: 'drawer', label: 'Tủ Thường (Lấp đầy)', width: 600, flex: true, icon: '🚪', enabled: true },
-  { id: 'l2', type: 'stove', label: 'Bếp Nấu', width: 800, flex: false, icon: '🔥', enabled: true },
-  { id: 'l3', type: 'spice', label: 'Gia Vị', width: 400, flex: false, icon: '🧂', enabled: false },
   { id: 'l4', type: 'sink', label: 'Bồn Rửa', width: 800, flex: false, icon: '🚿', enabled: true },
-  { id: 'l5', type: 'dish-rack', label: 'Tủ Chén Bát (Dưới)', width: 800, flex: false, icon: '🥣', enabled: false },
   { id: 'l6', type: 'dw', label: 'Máy Rửa Bát', width: 600, flex: false, icon: '🍽️', enabled: false },
-  { id: 'l7', type: 'rice', label: 'Tủ Gạo', width: 300, flex: false, icon: '🌾', enabled: false },
+  { id: 'l1', type: 'drawer', label: 'Tủ Thường 1', width: 600, flex: true, icon: '🚪', enabled: true },
+  { id: 'l3', type: 'spice', label: 'Gia Vị', width: 400, flex: false, icon: '🧂', enabled: true },
+  { id: 'l2', type: 'stove', label: 'Bếp Nấu', width: 800, flex: false, icon: '🔥', enabled: true },
+  { id: 'l8', type: 'drawer', label: 'Tủ Thường 2', width: 600, flex: true, icon: '🚪', enabled: true },
+  { id: 'l7', type: 'rice', label: 'Tủ Gạo', width: 300, flex: false, icon: '🌾', enabled: true },
+  { id: 'l5', type: 'dish-rack', label: 'Tủ Chén Bát (Dưới)', width: 800, flex: false, icon: '🥣', enabled: false },
+  { id: 'l9', type: 'drawer', label: 'Tủ Thường 3', width: 600, flex: true, icon: '🚪', enabled: false },
 ];
 
 const DEFAULT_UPPER: UIModule[] = [
-  { id: 'u1', type: 'drawer', label: 'Tủ Thường (Lấp đầy)', width: 600, flex: true, icon: '🚪', enabled: true },
+  { id: 'u3', type: 'dish-rack', label: 'Kệ Chén (Trên)', width: 800, flex: false, icon: '🍽️', enabled: true },
+  { id: 'u1', type: 'drawer', label: 'Tủ Thường 1', width: 600, flex: true, icon: '🚪', enabled: true },
   { id: 'u2', type: 'hood', label: 'Hút Mùi', width: 800, flex: false, icon: '💨', enabled: true },
-  { id: 'u3', type: 'dish-rack', label: 'Kệ Chén (Trên)', width: 800, flex: false, icon: '🍽️', enabled: false },
+  { id: 'u5', type: 'drawer', label: 'Tủ Thường 2', width: 600, flex: true, icon: '🚪', enabled: true },
   { id: 'u4', type: 'altar', label: 'Bàn Thờ Ông Táo', width: 450, flex: false, icon: '🙏', enabled: true },
+  { id: 'u6', type: 'drawer', label: 'Tủ Thường 3', width: 600, flex: true, icon: '🚪', enabled: false },
 ];
 
 function SectionHeading({ icon, title }: { icon: string; title: string }) {
